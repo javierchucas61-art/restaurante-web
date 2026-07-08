@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portada</title>
+</head>
+<body>
+        <!-- TÍTULO -->
+    <title>Restaurante IA</title>
+<style>
+    /* ========================= */
+/* RESET */
+/* ========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ========================= */
+/* BODY */
+/* ========================= */
+
+body{
+
+    /* FUENTE */
+    font-family:Arial;
+
+    /* COLOR FONDO */
+ 
+    
+    background-image: url(./img/rest.jpeg);
+    background-size: cover;
+    background-position: center;
+
+    /* COLOR TEXTO */
+    color:white;
+
+margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-attachment: fixed;
+    height: 100;
+    display: flex;
+    justify-content: center; /* CENTRAR HORIZONTAL */
+    align-items: center;     /* CENTRAR VERTICAL */
+
+}
+
+/* ========================= */
+/* PORTADA */
+/* ========================= */
+
+.hero{
+
+    /* ALTURA COMPLETA */
+    min-height:100vh;
+
+    /* CENTRAR */
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    /* TEXTO CENTRADO */
+    text-align:center;
+
+    /* ESPACIO */
+    padding:20px;
+
+}
+
+/* ========================= */
+/* ROBOT */
+/* ========================= */
+
+.robot{
+
+    /* CAMBIAR TAMAÑO ROBOT */
+    width:250px;
+
+    margin-bottom:20px;
+
+}
+
+/* ========================= */
+/* TÍTULO */
+/* ========================= */
+
+.hero h1{
+
+    font-size:60px;
+
+    margin-bottom:15px;
+
+}
+
+/* ========================= */
+/* TEXTO */
+/* ========================= */
+
+.hero p{
+
+    font-size:20px;
+
+    margin-bottom:30px;
+
+}
+
+/* ========================= */
+/* BOTÓN */
+/* ========================= */
+
+.btn{
+
+    background:#7c3aed;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:15px 30px;
+
+    border-radius:15px;
+
+    transition:0.3s;
+
+}
+
+/* EFECTO HOVER */
+
+.btn:hover{
+
+    transform:scale(1.05);
+
+}
+
+/* ========================= */
+/* RESPONSIVE CELULAR */
+/* ========================= */
+
+@media(max-width:768px){
+
+    .hero h1{
+
+        font-size:40px;
+
+    }
+
+    .robot{
+
+        width:180px;
+
+    }
+
+}
+</style>
+
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- PORTADA PRINCIPAL -->
+    <!-- ========================= -->
+
+    <section class="hero">
+
+        <!-- CAMBIAR AQUÍ IMAGEN DEL ROBOT -->
+        <img src="../pagina web/img/trans.png"
+        alt="Robot"
+        class="robot">
+
+        <!-- TÍTULO -->
+        <h1>Restaurante IA</h1>
+
+        <!-- TEXTO -->
+        <p>
+            Pide tu comida favorita
+            rápida y fácilmente
+        </p>
+
+        <!-- BOTÓN ENTRAR -->
+        <a href="menu.html"
+        class="btn">
+            Entrar al Menú
+        </a>
+
+    </section>
+
+    <!-- CONECTAR JS -->
+    <script>
+        // =========================
+// ESTE ARCHIVO CONTROLARÁ
+// FUTURAS ANIMACIONES
+// =========================
+
+// EJEMPLO:
+console.log("index cargada");
+    </script>
+</body>
+</html>

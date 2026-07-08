@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* ========================= */
+/* RESET */
+/* ========================= */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+/* ========================= */
+/* BODY */
+/* ========================= */
+
+body{
+
+    font-family:Arial;
+
+    background:#64037c;
+
+    color:white;
+
+}
+.robot-img{
+    mix-blend-mode:multiply;
+}
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+
+.navbar{
+
+    background:#64037c;
+
+    padding:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+/* LINKS */
+
+.nav-links{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+/* LINKS */
+
+.nav-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+}
+
+/* ========================= */
+/* CONTENEDOR */
+/* ========================= */
+
+.contenedor{
+
+    min-height:80vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:20px;
+
+}
+
+/* QR */
+
+.qr{
+
+    width:300px;
+
+    margin:25px 0;
+
+    border-radius:20px;
+
+}
+
+/* TOTAL */
+
+#total{
+
+    margin:20px 0;
+
+}
+
+/* BOTÓN */
+
+button{
+
+    background:#7c3aed;
+
+    color:white;
+
+    border:none;
+
+    padding:15px 25px;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+/* HOVER */
+
+button:hover{
+
+    opacity:0.8;
+
+}
+
+/* ========================= */
+/* MENSAJE FINAL */
+/* ========================= */
+
+.mensaje-final{
+
+    display:none;
+
+    text-align:center;
+
+    padding:40px 20px;
+
+}
+
+/* ESTADO */
+
+.estado{
+
+    margin-top:20px;
+
+    background:#1e293b;
+
+    padding:20px;
+
+    border-radius:15px;
+
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:768px){
+
+    .navbar{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+    .qr{
+
+        width:220px;
+
+    }
+
+}
+    </style>
+</head>
+<body>
+        <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
+
+    <nav class="navbar">
+
+        <!-- LOGO -->
+        <h1>💳 Pago</h1>
+
+        <!-- LINKS -->
+        <div class="nav-links">
+
+            <a href="portada.html">
+                🏠 Inicio
+            </a>
+
+            <a href="menu.html">
+                🍔 Menú
+            </a>
+
+            <a href="carrito.html">
+                🛒 Carrito
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- ========================= -->
+    <!-- CONTENEDOR -->
+    <!-- ========================= -->
+
+    <section class="contenedor">
+
+        <!-- TÍTULO -->
+        <h2>Finaliza tu pedido</h2>
+
+        <!-- TEXTO -->
+        <p>
+            Escanea el QR y realiza el pago
+        </p>
+
+        <!-- ========================= -->
+        <!-- QR -->
+        <!-- ========================= -->
+
+        <!-- CAMBIAR AQUÍ EL QR -->
+        <img
+        src="../pagina web/img/QR.jpg"
+        alt="QR Yape"
+        class="qr">
+
+        <!-- ========================= -->
+        <!-- NÚMERO YAPE -->
+        <!-- ========================= -->
+
+        <!-- CAMBIAR AQUÍ TU NÚMERO -->
+        <h3>
+            Yape: 941 548 885
+        </h3>
+
+        <!-- ========================= -->
+        <!-- TOTAL -->
+        <!-- ========================= -->
+
+        <h2 id="total">
+            Total: S/ 0
+        </h2>
+
+        <!-- ========================= -->
+        <!-- BOTÓN CONFIRMAR -->
+        <!-- ========================= -->
+
+        <button
+        onclick="confirmarPago()">
+
+            ✅ Ya realicé el pago
+
+        </button>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- MENSAJE FINAL -->
+    <!-- ========================= -->
+
+    <section
+    class="mensaje-final"
+    id="mensaje-final">
+
+        <h2>
+            🎉 Pedido confirmado
+        </h2>
+
+        <p>
+            Tu comida está siendo preparada
+        </p>
+
+        <!-- ESTADO -->
+        <div class="estado">
+
+            🍳 Estado:
+            Preparando pedido...
+
+        </div>
+
+    </section>
+
+    <!-- JS -->
+    <script>
+        // =========================
+// OBTENER CARRITO
+// =========================
+
+let carrito = JSON.parse(
+    localStorage.getItem("carrito")
+) || [];
+
+
+// =========================
+// TOTAL
+// =========================
+
+let total = 0;
+
+
+// =========================
+// RECORRER PRODUCTOS
+// =========================
+
+carrito.forEach(producto => {
+
+    total += producto.precio;
+
+});
+
+
+// =========================
+// MOSTRAR TOTAL
+// =========================
+
+document.getElementById(
+    "total"
+).textContent =
+"Total: S/ " + total;
+
+
+// =========================
+// CONFIRMAR PAGO
+// =========================
+
+function confirmarPago(){
+
+    // MOSTRAR MENSAJE FINAL
+    document.getElementById(
+        "mensaje-final"
+    ).style.display = "block";
+
+    // BAJAR AUTOMÁTICAMENTE
+    document.getElementById(
+        "mensaje-final"
+    ).scrollIntoView({
+
+        behavior:"smooth"
+
+    });
+
+    // LIMPIAR CARRITO
+    localStorage.removeItem(
+        "carrito"
+    );
+
+}
+    </script>
+
+</body>
+</html>

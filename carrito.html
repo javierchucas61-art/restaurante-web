@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* ========================= */
+/* RESET */
+/* ========================= */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+/* ========================= */
+/* BODY */
+/* ========================= */
+
+body{
+
+    font-family:Arial;
+
+    background-image: url(./img/fondo.png);
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-attachment: fixed;
+    justify-content: center; /* CENTRAR HORIZONTAL */
+    align-items: center;     /* CENTRAR VERTICAL */
+
+}
+
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+
+.navbar{
+
+   background-image: url(./img/fondo.png);
+    padding:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+/* LINKS */
+
+.nav-links{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+/* LINKS */
+
+.nav-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+}
+
+/* ========================= */
+/* CONTENEDOR */
+/* ========================= */
+
+.contenedor{
+
+    padding:40px 20px;
+
+}
+
+/* TÍTULO */
+
+.contenedor h2{
+
+    margin-bottom:25px;
+
+}
+
+/* ========================= */
+/* PRODUCTOS */
+/* ========================= */
+
+.item{
+
+    background-image: url(./img/fondo.png);
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-bottom:15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+/* BOTÓN ELIMINAR */
+
+.item button{
+
+    background:red;
+
+    color:white;
+
+    border:none;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+/* ========================= */
+/* TOTAL */
+/* ========================= */
+
+#total{
+
+    margin-top:25px;
+
+}
+
+/* ========================= */
+/* BOTONES */
+/* ========================= */
+
+.botones{
+
+    margin-top:30px;
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+/* BOTONES */
+
+.botones button{
+
+    padding:15px 20px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    background:#7c3aed;
+
+    color:white;
+
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:768px){
+
+    .navbar{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+    .item{
+
+        flex-direction:column;
+
+        gap:15px;
+
+        text-align:center;
+
+    }
+
+}
+    </style>
+</head>
+<body>
+
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
+
+    <nav class="navbar">
+
+        <!-- LOGO -->
+        <h1>🛒 Tu Carrito</h1>
+
+        <!-- LINKS -->
+        <div class="nav-links">
+
+            <a href="portada.html">
+                🏠 Inicio
+            </a>
+
+            <a href="menu.html">
+                🍔 Menú
+            </a>
+
+            <a href="pago.html">
+                💳 Pago
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- ========================= -->
+    <!-- CONTENEDOR PRINCIPAL -->
+    <!-- ========================= -->
+
+    <section class="contenedor">
+
+        <!-- TÍTULO -->
+        <h2>Productos agregados</h2>
+
+        <!-- LISTA PRODUCTOS -->
+        <div id="lista-carrito">
+
+            <!-- JS INSERTA PRODUCTOS AQUÍ -->
+
+        </div>
+
+        <!-- TOTAL -->
+        <h3 id="total">
+            Total: S/ 0
+        </h3>
+
+        <!-- BOTONES -->
+        <div class="botones">
+
+            <!-- VACIAR -->
+            <button onclick="vaciarCarrito()">
+
+                🗑 Vaciar Carrito
+
+            </button>
+
+            <!-- IR A PAGO -->
+            <a href="pago.html">
+
+                <button>
+
+                    💳 Continuar Pago
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- JS -->
+    <script>
+        // =========================
+// OBTENER PRODUCTOS
+// DEL LOCALSTORAGE
+// =========================
+
+let carrito = JSON.parse(
+    localStorage.getItem("carrito")
+) || [];
+
+
+// =========================
+// CONTENEDOR HTML
+// =========================
+
+const lista =
+document.getElementById(
+    "lista-carrito"
+);
+
+
+// =========================
+// VARIABLE TOTAL
+// =========================
+
+let total = 0;
+
+
+// =========================
+// MOSTRAR PRODUCTOS
+// =========================
+
+function mostrarCarrito(){
+
+    // LIMPIAR HTML
+    lista.innerHTML = "";
+
+    // REINICIAR TOTAL
+    total = 0;
+
+    // RECORRER PRODUCTOS
+    carrito.forEach((producto,index)=>{
+
+        // CREAR DIV
+        const div =
+        document.createElement("div");
+
+        // CLASE CSS
+        div.classList.add("item");
+
+        // HTML PRODUCTO
+        div.innerHTML = `
+
+            <div>
+
+                <h3>${producto.nombre}</h3>
+
+                <p>
+                    Precio: S/ ${producto.precio}
+                </p>
+
+            </div>
+
+            <button
+            onclick="eliminarProducto(${index})">
+
+                ❌ Eliminar
+
+            </button>
+
+        `;
+
+        // INSERTAR HTML
+        lista.appendChild(div);
+
+        // SUMAR TOTAL
+        total += producto.precio;
+
+    });
+
+    // MOSTRAR TOTAL
+    document.getElementById(
+        "total"
+    ).textContent =
+    "Total: S/ " + total;
+
+}
+
+
+// =========================
+// ELIMINAR PRODUCTO
+// =========================
+
+function eliminarProducto(index){
+
+    // ELIMINAR DEL ARRAY
+    carrito.splice(index,1);
+
+    // ACTUALIZAR STORAGE
+    localStorage.setItem(
+        "carrito",
+        JSON.stringify(carrito)
+    );
+
+    // RECARGAR
+    mostrarCarrito();
+
+}
+
+
+// =========================
+// VACIAR CARRITO
+// =========================
+
+function vaciarCarrito(){
+
+    // VACIAR ARRAY
+    carrito = [];
+
+    // LIMPIAR STORAGE
+    localStorage.removeItem(
+        "carrito"
+    );
+
+    // ACTUALIZAR
+    mostrarCarrito();
+
+}
+
+
+// ========================= */
+/* INICIAR */
+// =========================
+
+mostrarCarrito();
+    </script>
+
+</body>
+</html>
